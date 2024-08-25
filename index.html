@@ -1,95 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoom Calendars</title>
-    <style>
-        .calendar-container {
-            display: none; /* All calendars are hidden by default */
-            margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Select Accounts to Display</h1>
-    <div id="calendarSelectors"></div>
+<!-- Submit a New Room Request Button -->
+<div style="text-align: center; margin-bottom: 20px;">
+  <a href="#request-form" style="text-decoration: none; background-color: #2E86C1; color: white; padding: 10px 20px; border-radius: 5px; font-weight: bold; display: inline-block;">
+    Submit a New Room Request
+  </a>
+</div>
 
-    <div id="calendarEmbeds"></div>
+<!-- Calendar Section -->
+<div id="calendar-container">
+    <div id="calendar-controls">
+        <button onclick="switchView('timeGridWeek')" class="calendar-btn">Week View</button>
+        <button onclick="switchView('timeGridDay')" class="calendar-btn">Day View</button>
+        <button onclick="switchView('listDay')" class="calendar-btn">List View</button>
+    </div>
 
-    <script>
-        const calendarUrls = [
-            "https://calendar.google.com/calendar/embed?src=c_1701ba16a0f9b84229e7b5f56b2c4341554a7c556462e50836266b088372a725%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_oaogmtcpq5de868nteh1jinmak%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_p6h96isdd7dgf8pgnvbma29c8k%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_pmsf5h4i8ln3q0t80l8nrobbcg%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_fthp27jhuv84npahns6ot2a49g%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_70kc7oh9gv162r7jttkrhdqd4s%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_86tkb5hi6o6nnaa44qqd9v1omk%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_2g15mjcp7ving22u66llhotjhs%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_9bf8e115bfdd188660486e854f2de70b2fcce6115f08a7bc7ca51c56a9e76ee3%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_n2tns7767ji6aqc4j9ctkl805s%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_5lq399fjv3puinehs8qmp06fpo%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_p5laa0q8bpqdm8fkgfeqpkakek%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_9u8d0a0e9o97slc4prkud86ie0%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_m00ev5ljiq264on915b659pveg%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_tb4saratceal5d4j4int6gr2k0%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_nfqau5e8jkr0v8ik8864duhvd0%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_p51rd7987p4eido2eomb7ilsuc%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_n56u1v86rjifacdm7j8sf3ovt8%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_2j0et1ebv79fs448fkp3in5qsg%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_b4q9uk98t26hrp72djnhqat23s%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_7egbshd9rl4hmhuq1bhb21tuus%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_fjmlav9pkmfhdoeldgjbjfu3u8%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_hubmin4j0vdncqsftgkitjet7c%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_847k16qt9evmd5hi8dj5bvp7d0%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_nnq1q5jiltrn9iv6lmq3vh910k%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_m3t7c929ivm3vkej9hp0pe89nk%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_8inp9o0fs8si71b8f5be8kfqoc%40group.calendar.google.com&ctz=America%2FLos_Angeles",
-            "https://calendar.google.com/calendar/embed?src=c_988fd5115ff23ba8a17f2a483321607a801a817d0189f6d3e29afb641bd772e0%40group.calendar.google.com&ctz=America%2FLos_Angeles"
-        ];
+    <div id="calendar"></div>
 
-        const calendarSelectors = document.getElementById('calendarSelectors');
-        const calendarEmbeds = document.getElementById('calendarEmbeds');
+    <div id="calendar-legend">
+        <h3>Calendar Legend</h3>
+        <label><input type="checkbox" id="calendar1-checkbox" checked> Zoom 1</label>
+        <label><input type="checkbox" id="calendar2-checkbox" checked> Zoom 2</label>
+        <label><input type="checkbox" id="calendar3-checkbox" checked> Zoom 3</label>
+        <label><input type="checkbox" id="calendar4-checkbox" checked> Zoom 4</label>
+        <label><input type="checkbox" id="calendar5-checkbox" checked> Zoom 5</label>
+        <label><input type="checkbox" id="calendar6-checkbox" checked> Zoom 6</label>
+        <label><input type="checkbox" id="calendar7-checkbox" checked> Zoom 7</label>
+        <label><input type="checkbox" id="calendar8-checkbox" checked> Zoom 8</label>
+        <label><input type="checkbox" id="calendar9-checkbox" checked> Zoom 9</label>
+        <label><input type="checkbox" id="calendar10-checkbox" checked> Zoom 10</label>
+        <label><input type="checkbox" id="calendar11-checkbox" checked> Zoom 11</label>
+        <label><input type="checkbox" id="calendar12-checkbox" checked> Zoom 12</label>
+        <label><input type="checkbox" id="calendar13-checkbox" checked> Zoom 13</label>
+        <label><input type="checkbox" id="calendar14-checkbox" checked> Zoom 14</label>
+        <label><input type="checkbox" id="calendar15-checkbox" checked> Zoom 15</label>
+        <label><input type="checkbox" id="calendar16-checkbox" checked> Zoom 16</label>
+        <label><input type="checkbox" id="calendar17-checkbox" checked> Zoom 17</label>
+        <label><input type="checkbox" id="calendar18-checkbox" checked> Zoom 18</label>
+        <label><input type="checkbox" id="calendar19-checkbox" checked> Zoom 19</label>
+        <label><input type="checkbox" id="calendar20-checkbox" checked> Zoom 20</label>
+        <label><input type="checkbox" id="calendar21-checkbox" checked> Zoom 21</label>
+        <label><input type="checkbox" id="calendar22-checkbox" checked> Zoom 22</label>
+        <label><input type="checkbox" id="calendar23-checkbox" checked> Zoom 23</label>
+        <label><input type="checkbox" id="calendar24-checkbox" checked> Zoom 24</label>
+        <label><input type="checkbox" id="calendar25-checkbox" checked> Zoom 25</label>
+        <label><input type="checkbox" id="calendar26-checkbox" checked> Zoom 26</label>
+        <label><input type="checkbox" id="calendar27-checkbox" checked> Zoom 27</label>
+        <label><input type="checkbox" id="calendar28-checkbox" checked> Zoom 28</label>
+    </div>
+</div>
 
-        // Generate checkboxes and iframes
-        calendarUrls.forEach((url, index) => {
-            // Create checkbox
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.id = 'calendarCheckbox' + index;
-            checkbox.addEventListener('change', () => toggleCalendar(index));
+<!-- Request Form -->
+<div id="request-form" style="margin-top: 40px;">
+  <h2>Room Request Form</h2>
+  <p><em><iframe class="airtable-embed" src="https://airtable.com/embed/appO2VdMPjLBxxWO1/pagKVmPToAycC0KxT/form" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe></em></p>
+</div>
 
-            // Create label for checkbox
-            const label = document.createElement('label');
-            label.htmlFor = 'calendarCheckbox' + index;
-            label.innerText = `Zoom ${index + 1}`; // You can customize the label text
+<link rel="stylesheet" href="https://raw.githubusercontent.com/clrcamy/canvas-calendar-js/main/calendar-style.css">
+<script src="https://raw.githubusercontent.com/clrcamy/canvas-calendar-js/main/calendar-script.js"></script>
 
-            // Append checkbox and label to the selector container
-            calendarSelectors.appendChild(checkbox);
-            calendarSelectors.appendChild(label);
-            calendarSelectors.appendChild(document.createElement('br'));
-
-            // Create iframe for calendar
-            const iframe = document.createElement('iframe');
-            iframe.id = 'calendar' + index;
-            iframe.src = url;
-            iframe.style = 'border: 0';
-            iframe.width = '800';
-            iframe.height = '600';
-            iframe.frameBorder = '0';
-            iframe.scrolling = 'no';
-            iframe.classList.add('calendar-container');
-
-            // Append iframe to the embed container
-            calendarEmbeds.appendChild(iframe);
-        });
-
-        // Function to toggle calendar visibility
-        function toggleCalendar(index) {
-            const iframe = document.getElementById('calendar' + index);
-            iframe.style.display = iframe.style.display === 'none' ? 'block' : 'none';
-        }
-    </script>
-</body>
-</html>
