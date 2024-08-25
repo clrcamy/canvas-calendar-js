@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'timeGridWeek', // Default view
         headerToolbar: false, // We are using custom controls
-        googleCalendarApiKey: 'AIzaSyDW9UMj8TSoUO8PureRi9mQb8SXoWh74LU', // <-- Replace with your API key
+        googleCalendarApiKey: 'YOUR_API_KEY_HERE', // <-- Replace with your API key
         events: [
             {
                 googleCalendarId: 'c_1701ba16a0f9b84229e7b5f56b2c4341554a7c556462e50836266b088372a725@group.calendar.google.com',
@@ -156,6 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     calendar.render();
 
+    // Event listeners for toggling calendar visibility
     document.getElementById('calendar1-checkbox').addEventListener('change', function() {
         toggleCalendar(calendar, 'calendar1', this.checked);
     });
@@ -241,17 +242,19 @@ document.addEventListener('DOMContentLoaded', function() {
         toggleCalendar(calendar, 'calendar28', this.checked);
     });
 
-    // Switch views
+    // Function to toggle the calendar visibility
+    function toggleCalendar(calendar, calendarClass, visible) {
+        var events = calendar.getEvents();
+        events.forEach(function(event) {
+            if (event.classNames.includes(calendarClass)) {
+                event.setProp('display', visible ? 'auto' : 'none');
+            }
+        });
+    }
+
+    // Function to switch calendar views
     window.switchView = function(view) {
         calendar.changeView(view);
     };
 });
 
-function toggleCalendar(calendar, calendarClass, visible) {
-    var events = calendar.getEvents();
-    events.forEach(function(event) {
-        if (event.classNames.includes(calendarClass)) {
-            event.setProp('display', visible ? 'auto' : 'none');
-        }
-    });
-}
