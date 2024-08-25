@@ -1,0 +1,188 @@
+#calendar-container {
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#calendar-controls {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.calendar-btn {
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #2E86C1;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.calendar-btn:hover {
+    background-color: #21618C;
+}
+
+#calendar-legend {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#calendar-legend h3 {
+    margin-bottom: 10px;
+    color: #2E86C1;
+}
+
+#calendar-legend label {
+    display: block;
+    margin: 5px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.fc .calendar1 {
+    background-color: #2E86C1 !important;
+    border-color: #2E86C1 !important;
+}
+
+.fc .calendar2 {
+    background-color: #28B463 !important;
+    border-color: #28B463 !important;
+}
+
+.fc .calendar3 {
+    background-color: #F1C40F !important;
+    border-color: #F1C40F !important;
+}
+
+.fc .calendar4 {
+    background-color: #E74C3C !important;
+    border-color: #E74C3C !important;
+}
+
+.fc .calendar5 {
+    background-color: #9B59B6 !important;
+    border-color: #9B59B6 !important;
+}
+
+.fc .calendar6 {
+    background-color: #1ABC9C !important;
+    border-color: #1ABC9C !important;
+}
+
+.fc .calendar7 {
+    background-color: #E67E22 !important;
+    border-color: #E67E22 !important;
+}
+
+.fc .calendar8 {
+    background-color: #34495E !important;
+    border-color: #34495E !important;
+}
+
+.fc .calendar9 {
+    background-color: #7D3C98 !important;
+    border-color: #7D3C98 !important;
+}
+
+.fc .calendar10 {
+    background-color: #5DADE2 !important;
+    border-color: #5DADE2 !important;
+}
+
+.fc .calendar11 {
+    background-color: #F1948A !important;
+    border-color: #F1948A !important;
+}
+
+.fc .calendar12 {
+    background-color: #48C9B0 !important;
+    border-color: #48C9B0 !important;
+}
+
+.fc .calendar13 {
+    background-color: #F39C12 !important;
+    border-color: #F39C12 !important;
+}
+
+.fc .calendar14 {
+    background-color: #A569BD !important;
+    border-color: #A569BD !important;
+}
+
+.fc .calendar15 {
+    background-color: #58D68D !important;
+    border-color: #58D68D !important;
+}
+
+.fc .calendar16 {
+    background-color: #DC7633 !important;
+    border-color: #DC7633 !important;
+}
+
+.fc .calendar17 {
+    background-color: #2874A6 !important;
+    border-color: #2874A6 !important;
+}
+
+.fc .calendar18 {
+    background-color: #EC7063 !important;
+    border-color: #EC7063 !important;
+}
+
+.fc .calendar19 {
+    background-color: #85C1E9 !important;
+    border-color: #85C1E9 !important;
+}
+
+.fc .calendar20 {
+    background-color: #AF7AC5 !important;
+    border-color: #AF7AC5 !important;
+}
+
+.fc .calendar21 {
+    background-color: #2ECC71 !important;
+    border-color: #2ECC71 !important;
+}
+
+.fc .calendar22 {
+    background-color: #E74C3C !important;
+    border-color: #E74C3C !important;
+}
+
+.fc .calendar23 {
+    background-color: #5499C7 !important;
+    border-color: #5499C7 !important;
+}
+
+.fc .calendar24 {
+    background-color: #F5B041 !important;
+    border-color: #F5B041 !important;
+}
+
+.fc .calendar25 {
+    background-color: #52BE80 !important;
+    border-color: #52BE80 !important;
+}
+
+.fc .calendar26 {
+    background-color: #BB8FCE !important;
+    border-color: #BB8FCE !important;
+}
+
+.fc .calendar27 {
+    background-color: #F0B27A !important;
+    border-color: #F0B27A !important;
+}
+
+.fc .calendar28 {
+    background-color: #48C9B0 !important;
+    border-color: #48C9B0 !important;
+}
